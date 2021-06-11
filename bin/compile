@@ -3,7 +3,8 @@
 #
 # Heroku buildpack for Meteor
 #
-
+# show disk space
+df -h
 # fail fast.
 #set -e
 # debug verbosely.
