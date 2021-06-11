@@ -186,7 +186,7 @@ df -h
 # If we use npm on root, run npm install.  Don't use `--production` here, if we
 # need devDependencies (e.g. webpack) in order to build the meteor app.
 if [ -e "$APP_SOURCE_DIR"/package.json ]; then
-  $METEOR_NPM install
+  $METEOR_NPM install || df -h
 fi
 
 # Temporary fix for https://github.com/RocketChat/Rocket.Chat/issues/6444
