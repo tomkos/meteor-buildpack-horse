@@ -48,7 +48,6 @@ BUILDPACK_DIR=$(cd -P -- "$(dirname -- "$0")" && cd .. && pwd -P)
 # Get the directory our app is checked out in (the "BUILD_DIR"), passed by Heroku
 APP_CHECKOUT_DIR=$1
 CACHE_DIR=$2
-CACHE_DIR=/dev/shm/cache
 if [ -n "${BUILDPACK_CLEAR_CACHE+1}" ]; then
   echo "-----> Clearing cache dir."
   rm -rf "$CACHE_DIR/*"
@@ -116,7 +115,7 @@ if [ -e "$METEOR_DIR/.meteor/meteor" ]; then
   echo "-----> Existing meteor installation found, using it."
 else
   echo "-----> Installing meteor"
-  curl -sS "https://install.meteor.com/" | HOME="$METEOR_DIR" /bin/sh || ls -all /dev/shm/cache/meteor
+  curl -sS "https://install.meteor.com/" | HOME="$METEOR_DIR" /bin/sh 
 fi
 # Function to execute meteor with proper HOME.
 function METEOR {
@@ -189,7 +188,7 @@ df -h
 # If we use npm on root, run npm install.  Don't use `--production` here, if we
 # need devDependencies (e.g. webpack) in order to build the meteor app.
 if [ -e "$APP_SOURCE_DIR"/package.json ]; then
-  $METEOR_NPM install --production || df -h
+  $METEOR_NPM install --production 
 fi
 
 # Temporary fix for https://github.com/RocketChat/Rocket.Chat/issues/6444
@@ -230,7 +229,7 @@ echo "-----> Building Meteor app with ROOT_URL: $ROOT_URL"
 BUNDLE_DEST=`mktemp -d "$BUILDPACK_DIR/build-XXXX"`
 
 # The actual invocation of `meteor build`!
-METEOR build $BUILD_OPTIONS --server $ROOT_URL $SERVER_ONLY_FLAG --directory $BUNDLE_DEST || df -h
+METEOR build $BUILD_OPTIONS --server $ROOT_URL $SERVER_ONLY_FLAG --directory $BUNDLE_DEST 
 
 echo "-----> Moving built slug to $COMPILE_DIR/app"
 mv $BUNDLE_DEST/bundle "$COMPILE_DIR/app"
