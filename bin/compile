@@ -33,6 +33,7 @@ echo "HEROKU_SLUG_COMMIT:      $HEROKU_SLUG_COMMIT"
 echo "HEROKU_SLUG_DESCRIPTION: $HEROKU_SLUG_DESCRIPTION"
 
 export_env_dir $3
+BUILDPACK_CLEAR_CACHE=1
 
 # Enable verbose debugging if configured to -- though this has to come after
 # we've loaded environment configs.
