@@ -195,7 +195,8 @@ fi
 set +e
 METEOR add rocketchat:lib
 set -e
-
+# check size one more time
+df -h
 # Related to https://github.com/meteor/meteor/issues/2796 and
 # https://github.com/meteor/meteor/issues/2606.  Some packages only build their
 # assets at runtime, and thus they are not available for bundling unless meteor
