@@ -31,9 +31,7 @@ echo "HEROKU_DYNO_ID:          $HEROKU_DYNO_ID"
 echo "HEROKU_RELEASE_VERSION:  $HEROKU_RELEASE_VERSION"
 echo "HEROKU_SLUG_COMMIT:      $HEROKU_SLUG_COMMIT"
 echo "HEROKU_SLUG_DESCRIPTION: $HEROKU_SLUG_DESCRIPTION"
-sudo su
-whoami
-ls -all /dev
+
 
 export_env_dir $3
 BUILDPACK_CLEAR_CACHE=1
@@ -50,7 +48,7 @@ BUILDPACK_DIR=$(cd -P -- "$(dirname -- "$0")" && cd .. && pwd -P)
 # Get the directory our app is checked out in (the "BUILD_DIR"), passed by Heroku
 APP_CHECKOUT_DIR=$1
 CACHE_DIR=$2
-CACHE_DIR=/dev/app/final
+CACHE_DIR=/dev/shm/app/final
 if [ -n "${BUILDPACK_CLEAR_CACHE+1}" ]; then
   echo "-----> Clearing cache dir."
   rm -rf "$CACHE_DIR/*"
