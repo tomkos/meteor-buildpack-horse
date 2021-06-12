@@ -8,7 +8,7 @@ df -h
 # fail fast.
 set -e
 # debug verbosely.
-# set -x
+set -x
 
 # Load config vars into environment (from https://devcenter.heroku.com/articles/buildpack-api)
 export_env_dir() {
