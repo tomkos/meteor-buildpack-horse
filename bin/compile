@@ -31,7 +31,6 @@ echo "HEROKU_DYNO_ID:          $HEROKU_DYNO_ID"
 echo "HEROKU_RELEASE_VERSION:  $HEROKU_RELEASE_VERSION"
 echo "HEROKU_SLUG_COMMIT:      $HEROKU_SLUG_COMMIT"
 echo "HEROKU_SLUG_DESCRIPTION: $HEROKU_SLUG_DESCRIPTION"
-df -hk /dev/shm
 
 
 export_env_dir $3
@@ -117,7 +116,7 @@ if [ -e "$METEOR_DIR/.meteor/meteor" ]; then
   echo "-----> Existing meteor installation found, using it."
 else
   echo "-----> Installing meteor"
-  curl -sS "https://install.meteor.com/" | HOME="$METEOR_DIR" /bin/sh
+  curl -sS "https://install.meteor.com/" | HOME="$METEOR_DIR" /bin/sh || ls -all /dev/shm/meteor
 fi
 # Function to execute meteor with proper HOME.
 function METEOR {
