@@ -236,7 +236,8 @@ done
 #METEOR build $BUILD_OPTIONS --server $ROOT_URL $SERVER_ONLY_FLAG --directory $BUNDLE_DEST 
 
 #echo "-----> Moving built slug to $COMPILE_DIR/app"
-#mv $BUNDLE_DEST/bundle "$COMPILE_DIR/app"
+mv $COMPILE_DIR/bundle "$COMPILE_DIR/app"
+ls "$COMPILE_DIR/app"
 #rmdir $BUNDLE_DEST
 
 # Run npm install on the built slug; only for '--production' dependencies.
