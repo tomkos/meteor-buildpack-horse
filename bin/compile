@@ -92,6 +92,9 @@ fi
 mkdir -p "$APP_CHECKOUT_DIR" "$METEOR_DIR"
 mkdir -p "$COMPILE_DIR" "$COMPILE_DIR/bin" "$COMPILE_DIR/lib"
 
+# TKO: download build
+curl -fSL "https://releases.rocket.chat/3.12.0/download" | tar xz
+
 # Set a default ROOT_URL if one is not defined. Currently, HEROKU_APP_NAME is
 # only available if you enable the labs addon "Heroku Dyno Metadata":
 # https://devcenter.heroku.com/articles/dyno-metadata
@@ -187,9 +190,9 @@ df -h
 
 # If we use npm on root, run npm install.  Don't use `--production` here, if we
 # need devDependencies (e.g. webpack) in order to build the meteor app.
-if [ -e "$APP_SOURCE_DIR"/package.json ]; then
-  $METEOR npm install
-fi
+#if [ -e "$APP_SOURCE_DIR"/package.json ]; then
+#  $METEOR npm install
+#fi
 
 # Temporary fix for https://github.com/RocketChat/Rocket.Chat/issues/6444
 # Try to add an existing package and let it fail, but the build command will work ¯\_(ツ)_/¯
@@ -225,15 +228,15 @@ done
 # Now on to bundling. Don't put the bundle in $APP_CHECKOUT_DIR during
 # bundling, or it will recurse, trying to bundle up its own bundling.
 
-echo "-----> Building Meteor app with ROOT_URL: $ROOT_URL"
-BUNDLE_DEST=`mktemp -d "$BUILDPACK_DIR/build-XXXX"`
+#echo "-----> Building Meteor app with ROOT_URL: $ROOT_URL"
+#BUNDLE_DEST=`mktemp -d "$BUILDPACK_DIR/build-XXXX"`
 
 # The actual invocation of `meteor build`!
-METEOR build $BUILD_OPTIONS --server $ROOT_URL $SERVER_ONLY_FLAG --directory $BUNDLE_DEST 
+#METEOR build $BUILD_OPTIONS --server $ROOT_URL $SERVER_ONLY_FLAG --directory $BUNDLE_DEST 
 
-echo "-----> Moving built slug to $COMPILE_DIR/app"
-mv $BUNDLE_DEST/bundle "$COMPILE_DIR/app"
-rmdir $BUNDLE_DEST
+#echo "-----> Moving built slug to $COMPILE_DIR/app"
+#mv $BUNDLE_DEST/bundle "$COMPILE_DIR/app"
+#rmdir $BUNDLE_DEST
 
 # Run npm install on the built slug; only for '--production' dependencies.
 echo "-----> Installing npm production dependencies on built slug"
