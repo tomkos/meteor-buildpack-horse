@@ -93,6 +93,7 @@ mkdir -p "$APP_CHECKOUT_DIR" "$METEOR_DIR"
 mkdir -p "$COMPILE_DIR" "$COMPILE_DIR/bin" "$COMPILE_DIR/lib"
 
 # TKO: download build
+cd "$COMPILE_DIR"
 curl -fSL "https://releases.rocket.chat/3.12.0/download" | tar xz
 
 # Set a default ROOT_URL if one is not defined. Currently, HEROKU_APP_NAME is
